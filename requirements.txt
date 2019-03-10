@@ -37,7 +37,7 @@ pyreadline==2.1
 PyScreeze==0.1.18
 PyTweening==1.0.3
 pytz==2018.7
-pywin32==224
+pypiwin32==224
 requests==2.20.1
 selenium==3.141.0
 six==1.11.0
