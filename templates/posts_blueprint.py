@@ -74,18 +74,18 @@ def decrement_post_likes(post_id):
 
     sql = ''' SELECT n_likes FROM posts WHERE id=%s'''
     try:
-        db.execute(sql, post_id)
+        db.execute(sql, (post_id,))
         n_likes = db.fetchone()
         n_likes = int(n_likes[0])
 
         if n_likes == 0:
-            sql = "DELETE * FROM posts WHERE id=%s"
+            sql = "DELETE FROM posts WHERE id=%s"
             db.execute(sql, post_id)
 
         else:
             n_likes = n_likes - 1
             sql = "UPDATE posts SET n_likes = %s WHERE id=%s"
-            db.execute(sql, (n_likes, post_id))
+            db.execute(sql, (n_likes, post_id,))
 
     except Exception as e:
         logger.error('Failed to decrement post likes!')
@@ -98,7 +98,7 @@ def decrement_post_likes(post_id):
 
     json_res = json.dumps({'message': 'Post likes updated!'})
     res = Response(json_res, status=200, mimetype='application/json')
-    
+
     return res
 
 
